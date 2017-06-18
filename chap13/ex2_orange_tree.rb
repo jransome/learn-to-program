@@ -20,35 +20,55 @@ class OrangeTree
         @age = 0
         @height = 0
         @fruit_produced = 0
+        @alive = true
     end
     
     def height
-       puts "Height: #{@height}"
+        if @alive == true
+            puts "Height: #{@height}" 
+        else
+            puts "Tree is dead, but last known height was: #{@height}"
+        end
     end
     
     def count_the_oranges
-       puts "Oranges: #{@fruit_produced}"
+        if @alive == true
+            puts "Oranges: #{@fruit_produced}"
+        else
+            puts "Tree is dead :( No more oranges :("
+        end
     end
     
     def pick_an_orange
-        if @fruit_produced >= 1
-            @fruit_produced -= 1
-            puts "Mmm that was a delicious orange..."
+        if @alive
+            if @fruit_produced >= 1
+                @fruit_produced -= 1
+                puts "Mmm that was a delicious orange..."
+            else
+                puts "No more oranges left this year!"
+            end
         else
-            puts "No more oranges left this year!"
+            puts "The tree has died you heartless oaf"
         end
     end
     
     def one_year_passes
        puts "A year has passed!"
-       @fruit_produced = 0
-       @age += 1 
-       @height += 0.5
-       
-       if @age > 4
-           produce_fruit
-       elsif @age > 4000
-           die
+       if @alive
+           @fruit_produced = 0
+           @age += 1 
+           @height += 0.5
+           
+            if @age > 4
+                if @age > 8
+                    die
+                else
+                    puts "The tree is #{@age} years old!"
+                    produce_fruit
+                end
+           end
+       else
+           puts "...and tree is still dead :("
        end
     end
     
@@ -60,7 +80,7 @@ class OrangeTree
     
     def die
         puts "tree has died :'("
-        exit
+        @alive = false
     end
 end
 
