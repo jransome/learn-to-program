@@ -9,10 +9,10 @@ all profiling on and off by changing just one line of code. Just one word!
 
 =end
 
-do_profiling = false
+$do_profiling = false
 
 def profile block_description, &block
-    if do_profiling
+    if $do_profiling
         start_time = Time.new
         block.call
         duration = Time.new - start_time
